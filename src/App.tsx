@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Card } from './components/Card';
 
 function App() {
+  const [cryptoList, setCryptoList] = useState("")
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
@@ -11,13 +12,23 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    fetch('/get_data').then(res => res.json()).then(data => {
+      setCryptoList(data);
+    });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-
-        ... no changes in this part ...
-
         <p>The current time is {currentTime}.</p>
+        <table>
+          <tbody>
+          {Object.entries(cryptoList).map((item) => {
+            return <Card key={item[0]} name={item[0]} currentPrice={item[1]}></Card>
+          })}
+          </tbody>
+        </table>
       </header>
     </div>
   );
