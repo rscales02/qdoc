@@ -25,6 +25,7 @@ yarn-error.log*
 .idea/
 
 *.pyc
-*/__pycache__/*
+/__pycache__
+api/__pycache__
 .python-version
 .vscode/
