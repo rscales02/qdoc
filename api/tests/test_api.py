@@ -13,16 +13,8 @@ def client():
         yield client
 
 
-def test_get_crypto_list(client):
-    # When get request sent to /get_list
-    c_list = client.get('/get_list')
-    # Expect response code 200 for successful reading of file
-    assert isinstance(c_list, Response)
-    assert c_list.status_code == 200
-
-
 def test_get_ticker_data(client):
-    # When post request sent to '/'
+    # When post request sent to '/get_data'
     c_data = client.get('/get_data')
     # Expect Response.data not to be None
     assert c_data.data is not None

@@ -1,9 +1,10 @@
 import logging
-from datetime import date, datetime
+import threading
+import requests
+
+from datetime import datetime
 
 from flask import Flask, Response
-
-from api.get_data import get_data
 
 log_format = (
     '[%(asctime)s] %(levelname)-8s %(name)-12s %(message)s')
@@ -17,17 +18,13 @@ logging.basicConfig(
 api = Flask(__name__)  # create the application instance :)
 api.config.from_object(__name__)  # load config from this file , flaskr.py
 
-# Load default config and override config from an environment variable
-api.config.update(dict(
-    FILE='crypto_list.txt'
-))
-
-FILE = api.config['FILE']
+global DATA
 
 
-def get_crypto_list(file=FILE):
+def get_crypto_list():
+    print('getting list')
     try:
-        with open(file, 'r') as f:
+        with open('crypto_list.txt', 'r') as f:
             coins = f.readlines()
             coins = [x.rstrip() for x in coins]
             return {"data": coins}
@@ -36,24 +33,40 @@ def get_crypto_list(file=FILE):
         return None
 
 
+crypto_list = get_crypto_list()
+api.config['LIST'] = crypto_list['data']
+
+
+def get_data(c_list):
+    print('getting data')
+    url = 'https://api.coinbase.com/v2/prices/%s/buy'
+    values = {}
+    for coin in c_list:
+        req = requests.get(url % coin).json()
+        if 'data' in req.keys():
+            values[coin] = req['data']['amount']
+
+    return values
+
+
+def periodic():
+    print('periodic fetch')
+    global DATA
+    d_list = api.config['LIST']
+    DATA = get_data(d_list)
+    logging.debug('Periodic shot!!!!')
+    threading.Timer(300, periodic).start()
+
+
+periodic()
+
+
 @api.route('/get_data', methods=['GET', 'POST'])
 def index():
-    c_list = get_crypto_list()
-    ticker = get_data(c_list['data'])
-    if ticker is not None:
-        resp = ticker
-        print(resp)
-        return resp
+    global DATA
+    if DATA is not None:
+        return DATA
     return 'Hello, again, again'
-
-
-@api.route('/get_list', methods=['GET'])
-def get_list():
-    c_list = get_crypto_list()
-    if c_list is not None:
-        return c_list
-    else:
-        return Response(status=404)
 
 
 @api.route('/time')

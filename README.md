@@ -1,3 +1,20 @@
+# Install and run flask and react app
+Clone and cd into directory.
+
+Open 2nd terminal and cd into api/
+
+run `poetry install`
+
+In poetry environment run `flask run`
+
+In first terminal `yarn install`
+
+Then `yarn start`
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

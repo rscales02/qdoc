@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Card } from './components/Card';
+import { TRow } from './components/TRow';
 
 function App() {
   const [cryptoList, setCryptoList] = useState("")
@@ -25,7 +25,7 @@ function App() {
         <table>
           <tbody>
           {Object.entries(cryptoList).map((item) => {
-            return <Card key={item[0]} name={item[0]} currentPrice={item[1]}></Card>
+            return <TRow key={item[0]} name={item[0]} value={item[1]}></TRow>
           })}
           </tbody>
         </table>
