@@ -2508,3 +2508,84 @@
 [2022-02-15 13:55:06,584] DEBUG    root         Periodic shot!!!!
 [2022-02-15 13:56:43,272] INFO     werkzeug     127.0.0.1 - - [15/Feb/2022 13:56:43] "GET /time HTTP/1.1" 200 -
 [2022-02-15 13:56:43,274] INFO     werkzeug     127.0.0.1 - - [15/Feb/2022 13:56:43] "GET /get_data HTTP/1.1" 200 -
+[2022-02-15 14:00:06,591] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:00:06,858] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BTC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:00:06,865] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:00:07,267] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/ETH-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:00:07,273] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:00:07,678] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDT-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:00:07,683] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:00:07,923] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BNB-USD/buy HTTP/1.1" 404 None
+[2022-02-15 14:00:07,932] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:00:08,292] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:00:08,297] DEBUG    root         Periodic shot!!!!
+[2022-02-15 14:05:08,301] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:05:08,706] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BTC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:05:08,713] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:05:08,932] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/ETH-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:05:08,940] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:05:09,229] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDT-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:05:09,239] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:05:09,526] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BNB-USD/buy HTTP/1.1" 404 None
+[2022-02-15 14:05:09,535] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:05:10,365] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:05:10,370] DEBUG    root         Periodic shot!!!!
+[2022-02-15 14:10:10,378] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:10:10,568] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BTC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:10:10,579] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:10:10,807] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/ETH-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:10:10,817] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:10:11,396] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDT-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:10:11,401] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:10:11,805] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BNB-USD/buy HTTP/1.1" 404 None
+[2022-02-15 14:10:11,816] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:10:12,215] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:10:12,220] DEBUG    root         Periodic shot!!!!
+[2022-02-15 14:15:12,225] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:15:12,862] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BTC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:15:12,867] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:15:13,281] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/ETH-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:15:13,287] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:15:13,681] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDT-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:15:13,690] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:15:14,091] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BNB-USD/buy HTTP/1.1" 404 None
+[2022-02-15 14:15:14,097] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:15:14,705] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:15:14,709] DEBUG    root         Periodic shot!!!!
+[2022-02-15 14:20:14,714] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:20:15,148] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BTC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:20:15,156] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:20:15,369] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/ETH-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:20:15,378] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:20:15,762] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDT-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:20:15,769] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:20:16,035] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BNB-USD/buy HTTP/1.1" 404 None
+[2022-02-15 14:20:16,038] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:20:16,310] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:20:16,315] DEBUG    root         Periodic shot!!!!
+[2022-02-15 14:20:34,020] INFO     werkzeug     127.0.0.1 - - [15/Feb/2022 14:20:34] "GET /time HTTP/1.1" 200 -
+[2022-02-15 14:20:34,021] INFO     werkzeug     127.0.0.1 - - [15/Feb/2022 14:20:34] "GET /get_data HTTP/1.1" 200 -
+[2022-02-15 14:25:16,319] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:25:16,718] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BTC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:25:16,729] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:25:16,969] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/ETH-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:25:16,974] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:25:17,333] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDT-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:25:17,339] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:25:17,742] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BNB-USD/buy HTTP/1.1" 404 None
+[2022-02-15 14:25:17,753] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:25:18,152] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:25:18,157] DEBUG    root         Periodic shot!!!!
+[2022-02-15 14:29:53,591] INFO     werkzeug     127.0.0.1 - - [15/Feb/2022 14:29:53] "GET /time HTTP/1.1" 200 -
+[2022-02-15 14:29:53,592] INFO     werkzeug     127.0.0.1 - - [15/Feb/2022 14:29:53] "GET /get_data HTTP/1.1" 200 -
+[2022-02-15 14:30:18,161] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:30:18,405] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BTC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:30:18,412] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:30:18,807] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/ETH-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:30:18,815] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:30:19,220] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDT-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:30:19,227] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:30:19,620] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/BNB-USD/buy HTTP/1.1" 404 None
+[2022-02-15 14:30:19,626] DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): api.coinbase.com:443
+[2022-02-15 14:30:20,030] DEBUG    urllib3.connectionpool https://api.coinbase.com:443 "GET /v2/prices/USDC-USD/buy HTTP/1.1" 200 None
+[2022-02-15 14:30:20,035] DEBUG    root         Periodic shot!!!!
