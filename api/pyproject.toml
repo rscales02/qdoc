@@ -13,6 +13,7 @@ pytest-flask = "^1.2.0"
 pandas-datareader = "^0.10.0"
 pytest-mock = "^3.7.0"
 Flask-Cors = "^3.0.10"
+coverage = "^6.3.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
