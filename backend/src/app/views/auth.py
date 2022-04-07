@@ -1,11 +1,11 @@
 import logging
 
-from flask import Blueprint, request, redirect, current_app
-from flask_login import login_required, current_user
+from flask import Blueprint, request, redirect, current_app, url_for
+from flask_login import login_required, current_user, login_user
 
-from qdoc_api import db
+from app import db
 
-from qdoc_api.models import User
+from app.models import User
 
 # Add logger
 logger = logging.getLogger(__name__)
@@ -20,12 +20,12 @@ logger.addHandler(stream)
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-@auth.route('/register', methods=['POST'])
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect('/')
     if not request.query_string:
-        return 'info not found'
+        return 400
     email = request.args.get('email')
     password = request.args.get('password')
     user = User(email=email)
@@ -33,6 +33,24 @@ def register():
     db.session.add(user)
     db.session.commit()
     return redirect('/login')
+
+
+@auth.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect('/')
+    if not request.query_string:
+        return [], 400
+    email = request.args.get('email')
+    password = request.args.get('password')
+    user = User.query.filter_by(email=email).first()
+    if not user or not user.check_password_hash(password):
+        return redirect('/register')
+    login_user(user)
+    next_page = request.args.get('next')
+    if not next_page:
+        next_page = '/time'
+    return redirect(next_page)
 
 
 @auth.route('/get_users', methods=['GET'])

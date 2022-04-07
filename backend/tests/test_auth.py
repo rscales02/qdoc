@@ -1,4 +1,3 @@
-from more_itertools import side_effect
 from . import client
 
 import unittest
@@ -19,23 +18,32 @@ class TestAuth(unittest.TestCase):
 
     def setUp(self) -> None:
         self.client = client()
+        self.user_data = {'email': 'test@test.com', 'password': 1234}
+        self.user_mock = MagicMock()
         return super().setUp()
 
-    @patch('qdoc_api.views.auth.User')
-    @patch('qdoc_api.views.auth.db')
+    @patch('app.views.auth.User')
+    @patch('app.views.auth.db')
     def test_register_user(self, db_mock, user_cls_mock):
         # Given
-        user_data = {'email': 'test@test.com', 'password': 1234}
-        user_mock = MagicMock()
-        user_cls_mock.side_effect = [user_mock]
+        user_cls_mock.side_effect = [self.user_mock]
         # When
-        self.client.post('/auth/register', query_string=user_data)
+        self.client.post('/auth/register', query_string=self.user_data)
         # Assert
-        db_mock.session.add.assert_called_with(user_mock)
+        db_mock.session.add.assert_called_with(self.user_mock)
         db_mock.session.add.assert_called_once()
         db_mock.session.commit.assert_called_once()
-        user_mock.set_password.assert_called_with('1234')
-        user_mock.set_password.assert_called_once()
+        self.user_mock.set_password.assert_called_with('1234')
+        self.user_mock.set_password.assert_called_once()
+
+    # @patch('app.views.auth.User')
+    # @patch('app.views.auth.db')
+    # def test_user_login(self, db_mock, user_cls_mock):
+    #     user_cls_mock.side_effect = [self.user_mock]
+    #     # When
+    #     self.client.post('auth/login', query_string=self.user_data)
+    #     self.user_mock.check_password.assert_called_with('1234')
+    #     self.user_mock.check_password.assert_called_once()
 
     def test_get_users(self):
         users = self.client.get('/auth/get_users')

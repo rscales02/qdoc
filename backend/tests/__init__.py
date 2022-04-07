@@ -1,7 +1,7 @@
 import pytest
 import os
 
-from qdoc_api import create_app
+from app import create_app
 
 __name__ = 'tests'
 

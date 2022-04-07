@@ -1,7 +1,7 @@
 from flask_login import UserMixin
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
-from qdoc_api import login, db
+from app import login, db
 
 
 class User(UserMixin, db.Model):
@@ -14,6 +14,9 @@ class User(UserMixin, db.Model):
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 @login.user_loader
