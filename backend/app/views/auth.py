@@ -1,7 +1,7 @@
 import logging
 
-from flask import Blueprint, request, redirect, current_app, url_for
-from flask_login import login_required, current_user, login_user
+from flask import Blueprint, request, redirect
+from flask_login import current_user, login_user
 
 from app import db
 
@@ -17,10 +17,10 @@ stream.setFormatter(formatter)
 logger.setLevel(logging.DEBUG)
 logger.addHandler(stream)
 
-auth = Blueprint('auth', __name__, url_prefix='/auth')
+bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-@auth.route('/register', methods=['GET', 'POST'])
+@bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect('/')
@@ -35,7 +35,7 @@ def register():
     return redirect('/login')
 
 
-@auth.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect('/')
@@ -53,7 +53,7 @@ def login():
     return redirect(next_page)
 
 
-@auth.route('/get_users', methods=['GET'])
+@bp.route('/get_users', methods=['GET'])
 def get_users():
     u = User.query.first()
     return str(u)

@@ -1,5 +1,4 @@
 import logging
-from logging.handlers import RotatingFileHandler
 
 from flask import Flask
 from flask_migrate import Migrate
@@ -7,7 +6,8 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
 # import Config
-from .config import DevelopmentConfig, TestingConfig
+from app.config import DevelopmentConfig, TestingConfig
+
 
 # import models for migration
 
@@ -48,9 +48,8 @@ def create_app(config_type=None):
     with api.app_context():
         # import and register blueprints
         db.create_all()
-        from app.views.index import index
-        from app.views.auth import auth
-        api.register_blueprint(index)
-        api.register_blueprint(auth)
-
+        from .views.index import bp as index_bp
+        from .views.auth import bp as auth_bp
+        api.register_blueprint(index_bp)
+        api.register_blueprint(auth_bp)
     return api

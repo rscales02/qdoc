@@ -1,5 +1,19 @@
 import os
 import tempfile
+import logging
+
+# Add logger
+logger = logging.getLogger(__name__)
+# Config format and stream/file handlers
+formatter = logging.Formatter('%(asctime)s| %(levelname)-8s| %(name)-12s| %(message)s')
+stream = logging.StreamHandler()
+stream.setFormatter(formatter)
+# file = RotatingFileHandler('api.log', maxBytes=2000, backupCount=10)
+# file.setFormatter(formatter)
+# Set log level and add handlers
+logger.setLevel(logging.DEBUG)
+logger.addHandler(stream)
+# logger.addHandler(file)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -13,13 +27,11 @@ class Config(object):
 
 
 class ProductionConfig(Config):
-    FLASK_ENV = 'production'
     # SQLALCHEMY_DATABASE_URI = 'mysql://user@localhost/foo'
     pass
 
 
 class DevelopmentConfig(Config):
-    FLASK_ENV = 'development'
     DEBUG = True
 
 

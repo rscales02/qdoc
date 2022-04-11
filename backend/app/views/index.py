@@ -3,13 +3,14 @@ from flask_login import current_user
 from datetime import datetime
 from flask_login import login_required
 import pytz
+
 from app import login
 
-index = Blueprint('index', __name__)
+bp = Blueprint('index', __name__)
 
 
-@index.route('/', methods=['GET', 'POST'])
-@index.route('/time', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET', 'POST'])
+@bp.route('/time', methods=['GET', 'POST'])
 @login_required
 def time_now():
     return {'time': datetime.now(pytz.timezone('Europe/Madrid')), 'user': current_user.email}
