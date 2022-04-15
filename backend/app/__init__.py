@@ -1,9 +1,10 @@
 import logging
 
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_migrate import Migrate
-from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 # import Config
 from app.config import DevelopmentConfig, TestingConfig
@@ -29,8 +30,8 @@ logger.addHandler(stream)
 
 # Load plugins
 db = SQLAlchemy()
-login = LoginManager()
 migrations = Migrate()
+jwt = JWTManager()
 
 
 def create_app(config_type=None):
@@ -41,9 +42,24 @@ def create_app(config_type=None):
     else:
         api.config.from_object(DevelopmentConfig)
     # Init plugins manager
-    login.init_app(api)
     db.init_app(api)
     migrations.init_app(api, db)
+    jwt.init_app(api)
+
+    @api.after_request
+    def after_request(response):
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+        return response
+
+    @api.route('/*', methods=["OPTIONS"])
+    def options():
+        return "OK"
+
+    @jwt.invalid_token_loader
+    def unauthorized_callback():
+        return redirect(url_for('auth.register'))
 
     with api.app_context():
         # import and register blueprints

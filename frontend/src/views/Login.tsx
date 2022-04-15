@@ -5,7 +5,7 @@ interface ILoginProps {};
 export const Login: FC<ILoginProps> = (props) => {
     return (
         <div>
-          <RegisterForm/>
+          <RegisterForm route='login'/>
         </div>
     );
 }

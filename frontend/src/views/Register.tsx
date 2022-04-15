@@ -5,7 +5,7 @@ interface IRegisterProps {};
 export const Register: FC<IRegisterProps> = (props) => {
     return (
         <div>
-          <RegisterForm/>
+          <RegisterForm route='register'/>
         </div>
     );
 }
