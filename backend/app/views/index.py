@@ -19,6 +19,11 @@ bp = Blueprint('index', __name__)
 
 
 @bp.route('/', methods=['GET', 'POST'])
+def index():
+    logger.info(request.args)
+    return {'time': datetime.now(pytz.timezone('Europe/Madrid'))}, 200
+
+
 @bp.route('/time', methods=['GET', 'POST'])
 @jwt_required()
 def time():

@@ -14,6 +14,7 @@ export const RegisterForm: FC<IRegisterFormProps> = (props) => {
     email: "",
     password: "",
   });
+
   const inputsHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.id === "email" || e.currentTarget.id === "password") {
       setInputField({
@@ -22,29 +23,42 @@ export const RegisterForm: FC<IRegisterFormProps> = (props) => {
       });
     }
   };
+
   const handleAddValue = (response: any) => {
     if (!response) return;
-    localStorage.setItem("user", JSON.stringify(response));
+    var res = JSON.stringify(response);
+    console.log(res);
+    localStorage.setItem("user", res);
   };
-  const handleSubmit = (event: React.FormEvent) => {
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     var queryString = Object.keys(inputField)
       .map((key: string) => key + "=" + inputField[key])
       .join("&");
 
-    return fetch(
+    var response = await fetch(
       `http://localhost:5000/auth/` + props.route + "?" + queryString,
       {
         mode: "cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          AUTHORIZATION: "Bearer ",
         },
       }
     )
-      .then((response) => response.json())
-      .then((response) => handleAddValue(response))
+      .then((response) => {
+        var json = response.json();
+        handleAddValue(json);
+        // console.log(json);
+        return json;
+      })
+
+      // .then((response) => handleAddValue(response.headers))
       .catch((error: any) => console.log(error));
+    console.log(response.headers);
+    return response;
   };
 
   return (

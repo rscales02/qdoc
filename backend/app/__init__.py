@@ -32,6 +32,7 @@ logger.addHandler(stream)
 db = SQLAlchemy()
 migrations = Migrate()
 jwt = JWTManager()
+cors = CORS(supports_credentials=True)
 
 
 def create_app(config_type=None):
@@ -45,19 +46,10 @@ def create_app(config_type=None):
     db.init_app(api)
     migrations.init_app(api, db)
     jwt.init_app(api)
-
-    @api.after_request
-    def after_request(response):
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-        return response
-
-    @api.route('/*', methods=["OPTIONS"])
-    def options():
-        return "OK"
+    cors.init_app(api)
 
     @jwt.invalid_token_loader
+    @jwt.unauthorized_loader
     def unauthorized_callback():
         return redirect(url_for('auth.register'))
 

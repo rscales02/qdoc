@@ -7,9 +7,10 @@ function UserTime() {
   const savedToken = localStorage.getItem("user");
   useEffect(() => {
     const token = savedToken ? JSON.parse(savedToken) : { access_token: "" };
+    console.log(token);
     fetch("/time", {
       headers: new Headers({
-        Authorization: "Bearer " + token["access_token"],
+        HTTP_Authorization: "Bearer " + token["access_token"],
       }),
     })
       .then((res) => res.json())
