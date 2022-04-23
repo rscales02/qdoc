@@ -28,18 +28,16 @@ def register():
     #     logger.info('User identified')
     #     return redirect('/')
     if not request.query_string:
-        logger.info('Missing Email/Password')
         return 'Missing Email/Password', 400
     email, password = request_helper(request)
     try:
         user = User(email=email)
-    except IntegrityError as e:
-        logger.info(e)
+    except IntegrityError:
+        return 'User already exists', 409
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
-    # logger.info('registration successful')
-    return redirect(url_for('auth.login')), 200
+    return redirect(url_for('auth.login')), 201
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -54,7 +52,6 @@ def login():
     resp = make_response(redirect(url_for('index.time')), 200)
     token = create_access_token(identity=user.email)
     resp.headers['Authorization'] = 'Bearer %s' % token
-    logger.info('Login successful')
     return resp
 
 
