@@ -4,7 +4,7 @@ import flask_sqlalchemy
 
 import flask
 from flask import Blueprint, request, redirect, url_for, jsonify, make_response
-from flask_jwt_extended import get_jwt_identity, create_access_token, verify_jwt_in_request
+from flask_jwt_extended import create_access_token, set_access_cookies
 from app import db
 
 from app.models import User
@@ -46,12 +46,11 @@ def login():
         return {}, 400
     email, password = request_helper(request)
     user = User.query.filter_by(email=email).first()
-    check_pass = user.check_password(password)
-    if not user or not check_pass:
+    if not user or not user.check_password(password):
         return 'Wrong username or password', 401
-    resp = make_response(redirect(url_for('index.time')), 200)
+    resp = make_response(redirect(url_for('index.post')), 200)
     token = create_access_token(identity=user.email)
-    resp.headers['Authorization'] = 'Bearer %s' % token
+    set_access_cookies(resp, token)
     return resp
 
 

@@ -3,8 +3,9 @@ import logging
 from flask import Flask, redirect, url_for
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, set_access_cookies, get_jwt
 from flask_cors import CORS
+from datetime import datetime, timezone, timedelta
 
 # import Config
 from app.config import DevelopmentConfig, TestingConfig
@@ -52,6 +53,22 @@ def create_app(config_type=None):
     @jwt.unauthorized_loader
     def unauthorized_callback():
         return redirect(url_for('auth.register'))
+
+    # Using an `after_request` callback, we refresh any token that is within 30
+    # minutes of expiring. Change the timedeltas to match the needs of your application.
+    @api.after_request
+    def refresh_expiring_jwts(response):
+        try:
+            exp_timestamp = get_jwt()["exp"]
+            now = datetime.now(timezone.utc)
+            target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
+            if target_timestamp > exp_timestamp:
+                access_token = create_access_token(identity=get_jwt_identity())
+                set_access_cookies(response, access_token)
+            return response
+        except (RuntimeError, KeyError):
+            # Case where there is not a valid JWT. Just return the original respone
+            return response
 
     with api.app_context():
         # import and register blueprints

@@ -5,7 +5,7 @@
 .idea
 __pycache__
 
-
+htmlcov/
 node_modules/
 
 *.db

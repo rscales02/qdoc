@@ -66,10 +66,17 @@ class TestLogin(TestAuth):
     def setUp(self) -> None:
         return super().setUp()
 
+    def test_user_login_no_query_string(self):
+        # When
+        p = self.client.post('/auth/login')
+        # Assert
+        assert p.status_code == 400
+
+    @patch('app.views.auth.set_access_cookies')
     @patch('app.views.auth.User.query.filter_by')
     @patch('app.views.auth.create_access_token', return_value='<JWT Token>')
     @patch('app.views.auth.User')
-    def test_user_login(self, user_cls_mock, mock_create_token, mock_filter_call):
+    def test_user_login(self, user_cls_mock, mock_create_token, mock_filter_call, mock_set_cookie):
         # Given User query call returning User instance
         mock_filter_call.return_value.first.side_effect = [self.user_mock]
         # When
@@ -79,16 +86,30 @@ class TestLogin(TestAuth):
         mock_filter_call.assert_called_once()
         self.user_mock.check_password.assert_called_once_with('1234')
         assert p.status_code == 200
-        assert '<JWT Token>' in p.headers.get('Authorization')
 
-    def test_user_login_no_query_string(self):
+    @patch('app.views.auth.User.query.filter_by')
+    @patch('app.views.auth.User')
+    def test_user_login_wrong_email(self, user_cls_mock, mock_filter_call):
+        # Given User query call returning User instance
+        mock_filter_call.return_value.first.side_effect = [None]
         # When
-        p = self.client.post('/auth/login')
+        p = self.client.post('/auth/login', query_string=self.user_data)
         # Assert
-        assert p.status_code == 400
+        assert p.status_code == 401
 
-    # def test_get_users(self):
-    #     users = self.client.get('/auth/get_users')
-    #     logger.info('Testing get_users: %s', users.data.decode('utf-8'))
-    #     assert users.status_code == 200
-    #     assert 'User' in users.data
+    @patch('app.views.auth.User.query.filter_by')
+    @patch('app.views.auth.User')
+    def test_user_login_wrong_password(self, user_cls_mock, mock_filter_call):
+        # Given User query call returning User instance
+        mock_filter_call.return_value.first.side_effect = [self.user_mock]
+        self.user_mock.check_password.return_value = False
+        # When
+        p = self.client.post('/auth/login', query_string={'email': 'test@test.com', 'password': 4321})
+        # Assert
+        self.user_mock.check_password.assert_called_with('4321')
+        assert p.status_code == 401
+
+    def test_get_users(self):
+        users = self.client.get('/auth/get_users')
+        assert users.status_code == 200
+        assert b'Empty' in users.data
